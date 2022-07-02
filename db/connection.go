@@ -12,7 +12,7 @@ var ConDB = ConnectionDB()
 
 func ConnectionDB() (conn *sql.DB) {
 	driver := "mysql"
-	cadena := "b5ef58cbb8c454:0f5b1694@tcp(us-cdbr-east-04.cleardb.com)/heroku_ae44dd41be82398"
+	cadena := "b6f9638509247c:aa8cd3ce@tcp(us-cdbr-east-05.cleardb.net)/heroku_e41bfd2bf0034e4"
 	conn, err := sql.Open(driver, cadena)
 	if err != nil {
 		fmt.Println(err.Error())

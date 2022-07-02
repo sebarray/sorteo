@@ -1,17 +1,14 @@
 package db
 
-import "sorteo/model"
+import "fmt"
 
-func CreateIp(user model.User) (Models.Planta, error) {
+func CreateIp(ip string) {
 
-	var planta Models.Planta
-
-	//query := " INSERT INTO usuarios (NAME, EMAIL) VALUES (\"" + user.IdUser + "\", \"" + user.TIPO + "\")"
-	query := idplant
+	query := `INSERT INTO direcction (ip) VALUE ('` + ip + `');`
 	create, err := ConDB.Prepare(query)
 	if err != nil {
-		return planta, err
+		fmt.Println(err.Error())
+
 	}
 	create.Exec()
-	return planta, nil
 }
