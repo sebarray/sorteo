@@ -1,6 +1,7 @@
 package main
 
 import (
+	"encoding/json"
 	"log"
 	"net/http"
 	"os"
@@ -21,6 +22,13 @@ func main() {
 		PORT = "8084"
 	}
 	r.HandleFunc("/cupon", router.Coupon).Methods("POST")
-
+	r.HandleFunc("/", Try).Methods("GET")
 	log.Fatal(http.ListenAndServe(":"+PORT, handlers.CORS(headers, methods, origin)(r)))
+}
+
+func Try(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("content-type", "application/json")
+	w.WriteHeader(http.StatusCreated)
+	json.NewEncoder(w).Encode("ccreo que ya pidio un cupon")
+
 }
