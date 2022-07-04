@@ -24,10 +24,10 @@ func Coupon(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("content-type", "application/json")
 		w.WriteHeader(http.StatusCreated)
 
-		if db.Validation(ip.Ip) {
+		if db.Validation(r.RemoteAddr) {
 			json.NewEncoder(w).Encode("ccreo que ya pidio un cupon")
 		} else {
-			_, P := db.Asignar(ip.Ip)
+			_, P := db.Asignar(r.RemoteAddr)
 			json.NewEncoder(w).Encode(P)
 		}
 	}
