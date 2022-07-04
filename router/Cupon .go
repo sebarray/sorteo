@@ -7,11 +7,13 @@ import (
 	"net/http"
 	"sorteo/db"
 	"sorteo/model"
+	"strings"
 )
 
 func Coupon(w http.ResponseWriter, r *http.Request) {
 	var ip model.User
-	fmt.Println(r.RemoteAddr)
+	direcction := strings.Split(r.RemoteAddr, ":")[0]
+
 	reqbody, err := ioutil.ReadAll(r.Body) //recibo datos que envia el cliente
 	if err != nil {
 		fmt.Fprintln(w, "error al recibir datos del cliente")
@@ -24,10 +26,10 @@ func Coupon(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("content-type", "application/json")
 		w.WriteHeader(http.StatusCreated)
 
-		if db.Validation(r.RemoteAddr) {
+		if db.Validation(direcction) {
 			json.NewEncoder(w).Encode("ccreo que ya pidio un cupon")
 		} else {
-			_, P := db.Asignar(r.RemoteAddr)
+			_, P := db.Asignar(direcction)
 			json.NewEncoder(w).Encode(P)
 		}
 	}
