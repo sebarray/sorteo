@@ -27,7 +27,7 @@ func Coupon(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusCreated)
 
 		if db.Validation(direcction) {
-			json.NewEncoder(w).Encode("ccreo que ya pidio un cupon")
+			json.NewEncoder(w).Encode("creo que ya pidio un cupon")
 		} else {
 			_, P := db.Asignar(direcction)
 			json.NewEncoder(w).Encode(P)
